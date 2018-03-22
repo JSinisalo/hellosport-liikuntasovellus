@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src = "https://unpkg.com/react@15/dist/react.min.js"></script>
+  <script src = "https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+  <script src = "https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>HelloSport</title>
+</head>
+<body>
+  <h1>Liikuntasovellus</h1> 
+  <button id = "addButton">New Post</button>
+  <!--The Posts-->
+  <div id = "root"></div>
+  <script type = "text/babel" src="post.js"></script>
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <form>
+          Title: <input type="text" id = "title"/>
+          <br>
+          Sport: <input type="text" id = "sport"/>
+          <br>
+          Looking for: <br>
+          <input type="checkbox" name="gender" value="male" checked> Male<br>
+          <input type="checkbox" name="gender" value="female"> Female<br>
+          <input type="checkbox" name="gender" value="other"> Other<br>
+          From: <input type="date" name="start_time"><br>
+          To: <input type="date" name="end_time"><br>
+          Description: <br>
+          <textarea rows="5" cols="60" maxlength="300"></textarea><br>
+      </form>
+      <button id = "post"> Post</button>
+    </div>  
+  </div>
+  <script src="modalForm.js"></script>
+</body>
+</html>
