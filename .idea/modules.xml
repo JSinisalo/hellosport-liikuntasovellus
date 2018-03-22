@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/hellosport-liikuntasovellus.iml" filepath="$PROJECT_DIR$/hellosport-liikuntasovellus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/hellosport-liikuntasovellus.iml" filepath="$PROJECT_DIR$/.idea/hellosport-liikuntasovellus.iml" />
     </modules>
   </component>
 </project>
