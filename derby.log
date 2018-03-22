@@ -1,8 +1,4 @@
 ----------------------------------------------------------------
-Thu Mar 22 23:36:08 EET 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-0162-4fa3-f769-00000d46ccc0 
-on database directory memory:C:\Projects\lukuvuosi2017\Ohjelmiston rakentamisprojekti\projekti\hellosport-liikuntasovellus\testdb with class loader sun.misc.Launcher$AppClassLoader@568db2f2 
-Loaded from file:/C:/Users/possumunnki/.m2/repository/org/apache/derby/derby/10.14.1.0/derby-10.14.1.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_111-b14
 user.dir=C:\Projects\lukuvuosi2017\Ohjelmiston rakentamisprojekti\projekti\hellosport-liikuntasovellus
