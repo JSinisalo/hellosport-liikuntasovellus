@@ -1,5 +1,7 @@
 window.addEventListener('load', () => {
 
+    let root = document.getElementById("root");
+
     document.body.appendChild(document.createElement('br'));
     let title = addElementFieldTo(document.body, "title", "input");
     document.body.appendChild(document.createElement('br'));

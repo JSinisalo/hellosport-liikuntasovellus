@@ -1,4 +1,6 @@
 
+    let root = document.getElementById("root");
+
     var modal = document.getElementById('myModal');
     // Get the button that opens the modal
     var addButton = document.getElementById('addButton');
@@ -13,7 +15,7 @@
     let searchEnd = document.getElementById("end_time");
     let gender = document.getElementById("gender");
     let sport = document.getElementById("sport");
-    createBlogpostTable(document.body);
+    createBlogpostTable(root);
     // When the user clicks the button, open the modal 
     addButton.onclick = function() {
       modal.style.display = "block";
@@ -64,7 +66,7 @@
       label.setAttribute("style", "font-weight:normal");
   
       to.appendChild(label);
-      document.body.appendChild(document.createElement('br'));
+      root.appendChild(document.createElement('br'));
       to.appendChild(element);
   
       return element;
