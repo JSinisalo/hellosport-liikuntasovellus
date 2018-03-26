@@ -26,6 +26,8 @@
     }
 
     post.onclick = function() {
+      let startEpoch = new Date(searchStart.value).valueOf()/1000 // converting the dates to epoch
+      let endEpoch = new Date(searchEnd.value).valueOf()/1000
       modal.style.display = "none"
       fetch('http://localhost:8080/notifications', {
 
@@ -35,8 +37,8 @@
           title: title.value,
           textBody: textBody.value,
           authorName: author.value,
-          searchStart: searchStart.value,
-          searchEnd: searchEnd.value,
+          searchStart: startEpoch,
+          searchEnd: endEpoch,
           gender: gender.value.split(' '),
           sport: sport.value.split(' ')
         }),
@@ -87,12 +89,15 @@ function createBlogpostTable(e) {
         for(let j = 0; j < arr.length; j++) {
 
             let tr = tbl.insertRow();
-    
+
+            let startEpoch = new Date(arr[j].searchStart*1000).toDateString() //converting epoch to date
+            let endEpoch = new Date(arr[j].searchEnd*1000).toDateString()
+
             tr.insertCell().appendChild(document.createTextNode(arr[j].title));
             tr.insertCell().appendChild(document.createTextNode(arr[j].authorName));
             tr.insertCell().appendChild(document.createTextNode(arr[j].textBody));
-            tr.insertCell().appendChild(document.createTextNode(arr[j].searchStart));
-            tr.insertCell().appendChild(document.createTextNode(arr[j].searchEnd));
+            tr.insertCell().appendChild(document.createTextNode(startEpoch));
+            tr.insertCell().appendChild(document.createTextNode(endEpoch));
             tr.insertCell().appendChild(document.createTextNode(arr[j].gender));
             tr.insertCell().appendChild(document.createTextNode(arr[j].sport));
             let b = tr.insertCell().appendChild(document.createElement('button'));
