@@ -14,7 +14,7 @@
         <form action="/logout" method="post">
             <input type="submit" value="Sign Out"/>
         </form>
-        <button id = "addButton">New Post</button>
+        <button id = "addButton" class="btn-primary">New Post</button>
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
@@ -25,12 +25,12 @@
                     <br>
                     textBody: <br>
                     <textarea rows="5" cols="60" maxlength="300" id="textBody"></textarea><br>
-                    Start time: <input type="number" id="start_time"><br>
-                    End time: <input type="number" id="end_time"><br>
+                    Start time: <input type="date" id="start_time"><br>
+                    End time: <input type="date" id="end_time"><br>
                     Gender:<input type="text" id ="gender"/>
                     
                 </form>
-                <button id = "post"> Post</button>
+                <button id = "post" class="btn-success"> Post</button>
             </div>  
         </div>
         <script src="modalForm.js"></script>
