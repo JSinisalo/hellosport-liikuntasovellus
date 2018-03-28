@@ -1,15 +1,17 @@
-import React, { Component } from 'react';
-import './App.css';
-import Test from './posts/Test'
+import React, {Component} from 'react';
 import MainLayout from './layouts/MainLayout';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch} from 'react-router-dom';
+import PostForm from './posts/PostForm';
+import PostTable from './posts/PostTable';
+import FullPost from './posts/FullPost';
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Switch>
-          <Route path="/test" render={() => <MainLayout content={<Test/>}/>}/>
-
+          <Route path="/postForm" render={() => <MainLayout content={<PostForm/>}/>}/>
+          <Route exact={true} path="/" component={() => <MainLayout content={<PostTable/>}/>}/>
+          <Route path={"/post/:postID"} render={(props) => <MainLayout content={<FullPost {...props} />} /> } />
         </Switch>
       </div>
     );

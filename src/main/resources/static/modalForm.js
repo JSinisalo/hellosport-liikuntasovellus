@@ -1,4 +1,6 @@
-    // Get the modal
+
+    let root = document.getElementById("root");
+
     var modal = document.getElementById('myModal');
     // Get the button that opens the modal
     var addButton = document.getElementById('addButton');
@@ -9,8 +11,11 @@
     let title = document.getElementById("title");
     let author = document.getElementById("author");
     let textBody = document.getElementById("textBody");
-   
-    createBlogpostTable(document.body);
+    let searchStart = document.getElementById("start_time");
+    let searchEnd = document.getElementById("end_time");
+    let gender = document.getElementById("gender");
+    let sport = document.getElementById("sport");
+    createBlogpostTable(root);
     // When the user clicks the button, open the modal 
     addButton.onclick = function() {
       modal.style.display = "block";
@@ -21,15 +26,21 @@
     }
 
     post.onclick = function() {
+      let startEpoch = new Date(searchStart.value).valueOf()/1000 // converting the dates to epoch
+      let endEpoch = new Date(searchEnd.value).valueOf()/1000
       modal.style.display = "none"
       fetch('http://localhost:8080/notifications', {
 
         method: 'POST', 
         body: JSON.stringify({
 
-            title: title.value,
-            textBody: textBody.value,
-            authorName: author.value
+          title: title.value,
+          textBody: textBody.value,
+          authorName: author.value,
+          searchStart: startEpoch,
+          searchEnd: endEpoch,
+          gender: gender.value.split(' '),
+          sport: sport.value.split(' ')
         }),
         headers: new Headers({ 'Content-Type': 'application/json'}) }).then((r) => { console.log(r); window.location.reload(false); }); 
         
@@ -57,36 +68,43 @@
       label.setAttribute("style", "font-weight:normal");
   
       to.appendChild(label);
-      document.body.appendChild(document.createElement('br'));
+      root.appendChild(document.createElement('br'));
       to.appendChild(element);
   
       return element;
   }
   
-  function createBlogpostTable(e) {
-  
-      let tbl  = document.createElement('table');
-  
-      tbl.style.border = '1px solid black';
-  
-      tbl.setAttribute('id','table1');
-  
-      let tr = tbl.insertRow();
-  
-      fetch('http://localhost:8080/notifications').then((response) => response.json()).then((arr) => {
-  
-          for(let j = 0; j < arr.length; j++) {
-  
-              let tr = tbl.insertRow();
-      
-              tr.insertCell().appendChild(document.createTextNode(arr[j].title));
-              tr.insertCell().appendChild(document.createTextNode(arr[j].authorName));
-              tr.insertCell().appendChild(document.createTextNode(arr[j].textBody));
-              let b = tr.insertCell().appendChild(document.createElement('button'));
-              b.innerHTML = 'DELET';
-              b.addEventListener('click',() => { fetch('http://localhost:8080/notifications/' + arr[j].id, { method: 'delete' }).then(() => { window.location.reload(false); }); });
-          }
-      });
+function createBlogpostTable(e) {
+
+    let tbl  = document.createElement('table');
+
+    tbl.style.border = '1px solid black';
+
+    tbl.setAttribute('id','table1');
+
+    let tr = tbl.insertRow();
+
+    fetch('http://localhost:8080/notifications').then((response) => response.json()).then((arr) => {
+
+        for(let j = 0; j < arr.length; j++) {
+
+            let tr = tbl.insertRow();
+
+            let startEpoch = new Date(arr[j].searchStart*1000).toDateString() //converting epoch to date
+            let endEpoch = new Date(arr[j].searchEnd*1000).toDateString()
+
+            tr.insertCell().appendChild(document.createTextNode(arr[j].title));
+            tr.insertCell().appendChild(document.createTextNode(arr[j].authorName));
+            tr.insertCell().appendChild(document.createTextNode(arr[j].textBody));
+            tr.insertCell().appendChild(document.createTextNode(startEpoch));
+            tr.insertCell().appendChild(document.createTextNode(endEpoch));
+            tr.insertCell().appendChild(document.createTextNode(arr[j].gender));
+            tr.insertCell().appendChild(document.createTextNode(arr[j].sport));
+            let b = tr.insertCell().appendChild(document.createElement('button'));
+            b.innerHTML = 'DELET';
+            b.addEventListener('click',() => { fetch('http://localhost:8080/notifications/' + arr[j].id, { method: 'delete' }).then(() => { window.location.reload(false); }); });
+        }
+    });
   
       e.appendChild(tbl);
   }
