@@ -14,10 +14,21 @@ export default class MainLayout extends Component {
       <div>
         <div className="header">
           <h1>SPORT APP</h1>
-        </div>
-        <div className="container">
-           {this.props.content}
           <Link to="/postForm"><button>Add Post</button> </Link>
+        </div>
+
+        <div className="container">
+          <div className="leftColumn">
+          </div>
+          <div className="middleColumn">
+          {this.props.content}
+          </div>
+          <div className="rightColumn">
+          </div>
+        </div> 
+        
+        <div className="footer">
+          <h2>This is footer</h2>
         </div>
       
       </div>        

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-
+import Modal from 'react-modal';
 export default class PostForm extends Component {
   constructor(props) {
     super(props);
@@ -12,11 +12,22 @@ export default class PostForm extends Component {
         searchEnd: "",
         gender: "",
         sport: ""
+    }, {
+      modalIsOpen:true
     });
+    	
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
     this.postNotification = this.postNotification.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
+  
+  closeModal() {
+      this.setState({modalIsOpen: false});
+  }
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value});
   }
@@ -31,8 +42,8 @@ export default class PostForm extends Component {
         title: this.state.title,
         textBody: this.state.textBody,
         authorName: this.state.authorName,
-        searchStart: startEpoch,
-        searchEnd: endEpoch,
+        searchStart: this.state.searchStart,
+        searchEnd: this.state.searchEnd,
         gender: this.state.gender.split(' '),
         sport: this.state.sport.split(' ')
       }),
@@ -41,7 +52,13 @@ export default class PostForm extends Component {
   }
   
   render() {
+    console.log((new Date(this.state.searchStart).valueOf()/1000).value);
     return(
+      <Modal   className="Modal"
+      overlayClassName="Overlay" isOpen={this.state.modalIsOpen} 
+             onAfterOpen={this.afterOpenModal}
+             onRequestClose={this.closeModal}
+             shouldCloseOnOverlayClick={true}>
       <form>
         Title: <input type="text"
                       name="title"
@@ -71,11 +88,13 @@ export default class PostForm extends Component {
         Gender:<input type="text" 
                       name ="gender"
                       ref="gender"
-                      onChange={this.handleChange}/>
-                  <Link to="/">
-          <button onClick={this.postNotification}> Post</button><br/>
-      </Link>
+                      onChange={this.handleChange}/><br/>
+        <Link to="/">
+            <button onClick={this.postNotification}> Post</button>
+            <button> Cancel</button> <br/>
+        </Link>
       </form>
+      </Modal>
     )
   }
 }

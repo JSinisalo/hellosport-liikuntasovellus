@@ -28,7 +28,6 @@ export default class FullPost extends Component {
     }
     
 
-
     render(){
       console.log(this.props);
       return(

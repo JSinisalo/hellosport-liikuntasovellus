@@ -37,7 +37,8 @@ window.addEventListener('load', () => {
                 gender: gender.value.split(' '),
                 sport: sport.value.split(' ')
             }),
-            headers: new Headers({ 'Content-Type': 'application/json'}) }).then((r) => { console.log(r); window.location.reload(false); }); 
+            headers: new Headers({ 'Content-Type': 'application/json'}) })
+            .then((r) => { console.log(r); window.location.reload(false); }); 
     });
     
     document.body.appendChild(document.createElement('br'));

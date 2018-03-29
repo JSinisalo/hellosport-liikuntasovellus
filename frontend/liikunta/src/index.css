@@ -4,47 +4,81 @@ body {
   font-family: sans-serif;
 }
 
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+.header{
+  text-align: center;
+  padding: 0.3em 0.5em;
+  background: -moz-linear-gradient(to top, rgb(255, 158, 79), #ffce47);
+  color: #19170b;
+  background: -webkit-linear-gradient(to top, rgb(255, 158, 79), #ffce47);
+  color: #19170b;
+  background: linear-gradient(to top, rgb(255, 158, 79), #ffce47);
+  color: #19170b;
 }
 
-/* Modal Content */
-.modal-content {
-  background-color: #fefefe;
-  margin: auto;
+.container{
+  display:flex;
+}
+
+.card {
+  background: -webkit-repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+  background: repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+  border: solid 3px #364e96;
+  border-radius: 0.5em;
+  width: 30%
 }
 
-/* The Close Button */
-.close {
-  color: #aaaaaa;
+.middleColumn{
+  flex: 4
+}
+
+.Modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  padding: 20px;
+  min-width: 200px;
+  max-width: 70%;
+  background-color: #fff;
+  border-radius: 1em;
+  transform: translate(-49%, -50%);
+  outline: transparent;
+}
+.Overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0,0,0,.4);
+}
+
+
+.leftColumn {
+  flex:1;
+  float: left;
+  border: black;
+  background: gray;
+  
+}
+
+.rightColumn {
+  flex:1;
+  clear: right;
   float: right;
-  font-size: 28px;
-  font-weight: bold;
+  border: black;
+  background: gray;
+  width:20%;
 }
 
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.description {
-  width: 300px;
-  height: 200px;    
-  text-align: left
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+  margin-top: 20px;
+  width: 100%;
 }

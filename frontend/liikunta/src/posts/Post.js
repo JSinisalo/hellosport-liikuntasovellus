@@ -6,7 +6,7 @@ export default class Post extends Component {
   render() {
     console.log(this.props.post);
     return (
-      <div>
+      <div className='card'>
         <div className = "postHeader">
           <h3>{this.props.post.title}</h3>
           <h4>{this.props.post.author}</h4>
