@@ -4,10 +4,18 @@ import {Link} from 'react-router-dom';
 import PostTable from '../posts/PostTable'
 import PostForm from '../posts/PostForm';
 export default class MainLayout extends Component {
+
   constructor(props) {
+
     super(props);
+    this.state = {sC: 0};
+
+    this.handleItemClick = this.handleItemClick.bind(this);
   }
-  
+
+  handleItemClick(e) {
+      this.setState({sC: e});
+  }
   
   render() {
     
@@ -15,7 +23,7 @@ export default class MainLayout extends Component {
       <div class="row">
         <div class="col">
 
-        <PostForm />
+        <PostForm selectedComment={this.state.sC}/>
 
           <div class="row">
             <div className="header">
@@ -31,7 +39,7 @@ export default class MainLayout extends Component {
               <div className="leftColumn">
               </div>
               <div className="middleColumn">
-              {this.props.content}
+              <PostTable selectedComment={(data) => this.handleItemClick(data)} />
               </div>
               <div className="rightColumn">
               </div>
