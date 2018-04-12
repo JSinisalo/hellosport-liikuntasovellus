@@ -54,7 +54,7 @@ export default class PostTable extends Component {
       hasMore={postList.length < this.state.posts.length}
       spinLoader={<div className="loader">Loading...</div>}
       mannualLoader={<span style={{fontSize: 20, lineHeight: 1.5, marginTop: 20, marginBottom: 20, display: 'inline-block'}}>Load More</span>}
-      noMore={<div className="loader">No More Items</div>} 
+      noMore={<div className="loader"></div>} 
       loadNext={() => this.loadMore()}
       threshold={0}>
           {postList}
