@@ -15,7 +15,9 @@ export default class PostForm extends Component {
         searchStart: "",
         searchEnd: "",
         gender: "",
-        sport: ""
+        sport: "",
+        commentAuthorName: "",
+        commentTextBody: ""
       };
     	
     this.postNotification = this.postNotification.bind(this);
@@ -27,7 +29,7 @@ export default class PostForm extends Component {
     this.setState({[event.target.name]: event.target.value});
   }
 
-  postNotification(event) {
+  postNotification() {
 
     let startEpoch = new Date(this.state.searchStart).valueOf()/1000 // converting the dates to epoch
     let endEpoch = new Date(this.state.searchEnd).valueOf()/1000
@@ -50,6 +52,22 @@ export default class PostForm extends Component {
       headers: new Headers({ 'Content-Type': 'application/json'}) }).
       then((r) => { console.log(r); window.location.reload(false); });
   }
+
+  postComment() {
+
+    fetch('http://localhost:8080/notifications/' + this.props.selectedComment + '/comments', { 
+
+      method: 'POST',
+
+      body: JSON.stringify({
+
+        author: this.state.commentAuthorName,
+        textbody: this.state.commentTextBody
+
+      }),
+      headers: new Headers({ 'Content-Type': 'application/json'}) }).
+      then((r) => { console.log(r); window.location.reload(false); });
+  }
   
   render() {
 
@@ -63,7 +81,13 @@ export default class PostForm extends Component {
           gender.length > 0 &&
           sport.length > 0;
 
+    const { commentAuthorName, commentTextBody } = this.state;
+    const cenabled =
+          commentAuthorName.length > 0 &&
+          commentTextBody.length > 0;
+
     return(
+      <div>
         <div class="modal fade" id="postNotificationModal" style={{width:'100%', margin:'auto'}}>
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -121,11 +145,44 @@ export default class PostForm extends Component {
               </div>
               <div class="modal-footer">
                 <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button class="btn btn-primary" disabled={!enabled} onClick={this.postNotification} data-dismiss="modal">Post</button>
+                <button class="btn btn-primary" disabled={!enabled} onClick={() => { this.postNotification() }} data-dismiss="modal">Post</button>
               </div>
             </div>
           </div>
         </div>
+        <div class="modal fade" id="postCommentModal" style={{width:'100%', margin:'auto'}}>
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Post a new comment</h5>
+                <button type="button" class="close" aria-label="Close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group row">
+                    <label for="commentAuthorName" class="col-sm-2 col-form-label">Author:</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text" id="commentAuthorName" name="commentAuthorName" ref="commentAuthorName" onChange={this.handleChange} value={this.state.commentAuthorName} placeholder="Your name, nickname, etc..." required/>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="commentTextBody" class="col-sm-2 col-form-label">Comment:</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" rows="5" id="commentTextBody" cols="60" maxLength="300" name="commentTextBody" ref="commentTextBody" onChange={this.handleChange} value={this.state.commentTextBody} placeholder="Your comment here..." required/>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-primary" disabled={!cenabled} onClick={() => { this.postComment() }} data-dismiss="modal">Post</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     )
   }
 }
