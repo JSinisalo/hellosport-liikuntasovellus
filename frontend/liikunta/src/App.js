@@ -7,9 +7,8 @@ import FullPost from './posts/FullPost';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App" class="container-fluid">
         <Switch>
-          <Route path="/postForm" render={() => <MainLayout content={<PostForm/>}/>}/>
           <Route exact={true} path="/" component={() => <MainLayout content={<PostTable/>}/>}/>
           <Route path={"/post/:postID"} render={(props) => <MainLayout content={<FullPost {...props} />} /> } />
         </Switch>
