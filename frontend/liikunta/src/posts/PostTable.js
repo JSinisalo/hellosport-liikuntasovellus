@@ -1,17 +1,20 @@
 import React, {Component} from 'react';
 import Post from './Post'
 import LimitedInfiniteScroll from 'react-limited-infinite-scroll'
+import contains from 'string-contains'
 
 export default class PostTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      search:"",
       activePosts: [],
       posts:[],
       totalPosts: 2
     }
     this.componentWillMount = this.componentWillMount.bind(this);
     this.renderPosts = this.renderPosts.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillMount() {
@@ -25,10 +28,19 @@ export default class PostTable extends Component {
 
   renderPosts(post) {
     if(this.state.activePosts.length > 0) {
-      return <Post key={post.id} post={post} />
+      if(this.state.search.trim() == "") {
+        return <Post key={post.id} post={post} />
+      } else if(contains(post.title.toLowerCase(),this.state.search.toLocaleLowerCase())) {
+        return <Post key={post.id} post={post} />
+      } 
+
     } else {
       return <p>Loading...</p>
     }
+  }
+  
+  handleChange(event) {
+    this.setState({[event.target.name]: event.target.value});
   }
 
   loadMore(){
@@ -49,6 +61,13 @@ export default class PostTable extends Component {
       this.renderPosts(post)
     );
     return(
+      <div>
+      <input type="text" 
+      name="search" 
+      ref="search"
+      placeholder="Search"
+      onChange={this.handleChange}/>
+
       <LimitedInfiniteScroll 
       limit={1} 
       hasMore={postList.length < this.state.posts.length}
@@ -59,6 +78,7 @@ export default class PostTable extends Component {
       threshold={0}>
           {postList}
       </LimitedInfiniteScroll>
+      </div>
     )
   }
 }
