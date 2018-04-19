@@ -1,11 +1,21 @@
 window.addEventListener('load', () => {
 
+    let root = document.getElementById("root");
+
     document.body.appendChild(document.createElement('br'));
     let title = addElementFieldTo(document.body, "title", "input");
     document.body.appendChild(document.createElement('br'));
     let author = addElementFieldTo(document.body, "author", "input");
     document.body.appendChild(document.createElement('br'));
     let textBody = addElementFieldTo(document.body, "textBody", "textarea");
+    document.body.appendChild(document.createElement('br'));
+    let searchStart = addElementFieldTo(document.body, "start time", "input");
+    document.body.appendChild(document.createElement('br'));
+    let searchEnd = addElementFieldTo(document.body, "end time", "input");
+    document.body.appendChild(document.createElement('br'));
+    let gender = addElementFieldTo(document.body, "gender", "input");
+    document.body.appendChild(document.createElement('br'));
+    let sport = addElementFieldTo(document.body, "sport", "input");
     document.body.appendChild(document.createElement('br'));
 
     textBody.style.height = "500px";
@@ -21,9 +31,14 @@ window.addEventListener('load', () => {
 
                 title: title.value,
                 textBody: textBody.value,
-                authorName: author.value
+                authorName: author.value,
+                searchStart: searchStart.value,
+                searchEnd: searchEnd.value,
+                gender: gender.value.split(' '),
+                sport: sport.value.split(' ')
             }),
-            headers: new Headers({ 'Content-Type': 'application/json'}) }).then((r) => { console.log(r); window.location.reload(false); }); 
+            headers: new Headers({ 'Content-Type': 'application/json'}) })
+            .then((r) => { console.log(r); window.location.reload(false); }); 
     });
     
     document.body.appendChild(document.createElement('br'));
@@ -72,6 +87,10 @@ function createBlogpostTable(e) {
             tr.insertCell().appendChild(document.createTextNode(arr[j].title));
             tr.insertCell().appendChild(document.createTextNode(arr[j].authorName));
             tr.insertCell().appendChild(document.createTextNode(arr[j].textBody));
+            tr.insertCell().appendChild(document.createTextNode(arr[j].searchStart));
+            tr.insertCell().appendChild(document.createTextNode(arr[j].searchEnd));
+            tr.insertCell().appendChild(document.createTextNode(arr[j].gender));
+            tr.insertCell().appendChild(document.createTextNode(arr[j].sport));
             let b = tr.insertCell().appendChild(document.createElement('button'));
             b.innerHTML = 'DELET';
             b.addEventListener('click',() => { fetch('http://localhost:8080/notifications/' + arr[j].id, { method: 'delete' }).then(() => { window.location.reload(false); }); });

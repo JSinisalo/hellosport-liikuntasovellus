@@ -28,16 +28,29 @@ public class Notification {
     @Column(name="comments_id")
     private List<Comment> comments = new ArrayList<>();
 
+    private long searchStart;
+    private long searchEnd;
+
+    @ElementCollection
+    private List<String> gender = new ArrayList<>();
+
+    @ElementCollection
+    private List<String> sport = new ArrayList<>();
+
     public Notification() {
         setTimePosted(Instant.now().getEpochSecond());
     }
 
-    public Notification(String title, String textBody, String authorName) {
+    public Notification(String title, String textBody, String authorName, long searchStart, long searchEnd, List<String> gender, List<String> sport) {
 
         setTitle(title);
         setTextBody(textBody);
         setAuthorName(authorName);
         setTimePosted(Instant.now().getEpochSecond());
+        setSearchStart(searchStart);
+        setSearchEnd(searchEnd);
+        setGender(gender);
+        setSport(sport);
     }
 
     public long getId() {
@@ -86,6 +99,38 @@ public class Notification {
 
     public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
+    }
+
+    public long getSearchStart() {
+        return searchStart;
+    }
+
+    public void setSearchStart(long searchStart) {
+        this.searchStart = searchStart;
+    }
+
+    public long getSearchEnd() {
+        return searchEnd;
+    }
+
+    public void setSearchEnd(long searchEnd) {
+        this.searchEnd = searchEnd;
+    }
+
+    public List<String> getGender() {
+        return gender;
+    }
+
+    public void setGender(List<String> gender) {
+        this.gender = gender;
+    }
+
+    public List<String> getSport() {
+        return sport;
+    }
+
+    public void setSport(List<String> sport) {
+        this.sport = sport;
     }
 
     public void addComment(Comment c) {
