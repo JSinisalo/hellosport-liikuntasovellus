@@ -1,19 +1,13 @@
 package com.hellosport.controller;
 
-import com.hellosport.db.Notification;
-import com.hellosport.db.NotificationRepository;
-import com.hellosport.db.Comment;
-import com.hellosport.db.CommentRepository;
+import com.hellosport.db.*;
 import com.hellosport.exception.CannotFindNotificationException;
 import com.hellosport.exception.CannotFindCommentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -161,5 +155,44 @@ public class RestController {
         repo.save(notification);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
+    //||||User||||
+    //VVVV----VVVV
+
+    @Autowired
+    private MemberRepository memberRepo;
+
+    @CrossOrigin
+    @RequestMapping(value = "/users")
+    public Iterable<Member> getMembers(){
+        return memberRepo.findAll();
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/users", method= RequestMethod.POST)
+    public ResponseEntity<Void> addBlogPost(@RequestBody Member member, UriComponentsBuilder builder){
+        memberRepo.save(member);
+
+        UriComponents uriComponents =
+                builder.path("users/{id}").buildAndExpand(member.getId());
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(uriComponents.toUri());
+
+        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/users/{memberID}", method = RequestMethod.GET)
+    public Member getMember(@PathVariable long memberID){
+        Member member = memberRepo.findById(memberID).orElse(null);
+        return member;
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/users/{memberID}", method = RequestMethod.DELETE)
+    public void deleteMember(@PathVariable long memberID){
+        memberRepo.deleteById(memberID);
     }
 }
