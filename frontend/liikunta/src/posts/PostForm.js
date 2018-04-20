@@ -120,7 +120,9 @@ export default class PostForm extends Component {
                   <div class="form-group row">
                     <label for="gender" class="col-sm-2 col-form-label">Gender:</label>
                     <div class="col-sm-10">
-                      <input class="form-control" type="text" id="gender" name ="gender" ref="gender" onChange={this.handleChange} value={this.state.gender} placeholder="Preffered genders seperated by whitespace (eg. 'male female')" required/>
+                        <label class="radio-inline"><input type="radio" id="gender" name ="gender" ref="gender" onChange={this.handleChange} value="Any" required/> Any </label>
+                        <label class="radio-inline"><input type="radio" id="gender" name ="gender" ref="gender" onChange={this.handleChange} value="Female" required/> Female </label>
+                        <label class="radio-inline"><input type="radio" id="gender" name ="gender" ref="gender" onChange={this.handleChange} value="Male" required/> Male </label>
                     </div>
                   </div>
                   <div class="form-group row">
