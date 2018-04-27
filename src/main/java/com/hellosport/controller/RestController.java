@@ -19,6 +19,7 @@ public class RestController {
     @Autowired
     private NotificationRepository repo;
 
+
     @RequestMapping(value = "/notifications", method = RequestMethod.POST)
     public ResponseEntity<Void> postNotification(@RequestBody Notification a, UriComponentsBuilder b) {
 
