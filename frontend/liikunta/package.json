@@ -19,5 +19,6 @@
     "babel-plugin-transform-es2015-modules-amd": "^6.24.1",
     "react-limited-infinite-scroll": "^2.0.4",
     "react-modal": "^3.3.2"
-  }
+  },
+  "homepage":"."
 }
