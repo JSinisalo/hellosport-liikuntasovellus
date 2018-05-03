@@ -3,6 +3,9 @@ import { Route } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import PostTable from '../posts/PostTable'
 import PostForm from '../posts/PostForm';
+import AdminPostTable from '../adminPosts/AdminPostTable'
+import AdminPostForm from '../adminPosts/AdminPostForm';
+
 export default class MainLayout extends Component {
 
   constructor(props) {
@@ -24,12 +27,22 @@ export default class MainLayout extends Component {
         <div class="col">
 
         <PostForm selectedComment={this.state.sC}/>
+        <AdminPostForm selectedComment={this.state.sC}/>
 
           <div class="row">
             <div className="header">
               <div style={{textAlign:"center", marginTop:'100px'}}>
                 <h1 class="display-1">HelloSport</h1>
-                <button style={{marginTop:'25px', marginBottom:'15px'}}type="button" className="btn btn-success" data-toggle="modal" data-target="#postNotificationModal">Post a new notification!</button>
+                <button style={{marginTop:'25px', marginBottom:'15px'}}
+                        type="button" 
+                        className="btn btn-success" 
+                        data-toggle="modal" 
+                        data-target="#postNotificationModal">Post a new notification!</button>
+                <button style={{marginTop:'25px', marginBottom:'15px'}}
+                        type="button" 
+                        className="btn btn-success" 
+                        data-toggle="modal" 
+                        data-target="#adminPostNotificationModal">Post a new event!</button>
               </div>
             </div>
           </div>

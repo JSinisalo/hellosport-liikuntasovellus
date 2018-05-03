@@ -1,6 +1,7 @@
 package com.hellosport.db;
 
 import javax.persistence.*;
+import java.time.Instant;
 
 /**
  * Created by possumunnki on 4.5.2018.
@@ -22,13 +23,14 @@ public class AdminNotification {
     private long timePosted;
 
     public AdminNotification() {
+        setTimePosted(Instant.now().getEpochSecond());
     }
 
     public AdminNotification(String title, String textBody, String authorName, long timePosted) {
         this.title = title;
         this.textBody = textBody;
         this.authorName = authorName;
-        this.timePosted = timePosted;
+        setTimePosted(Instant.now().getEpochSecond());
     }
 
     public long getId() {
