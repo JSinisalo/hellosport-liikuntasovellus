@@ -1,0 +1,15 @@
+com\hellosport\db\Comment.class
+com\hellosport\db\MemberRepository.class
+com\hellosport\exception\CannotFindEntityException.class
+com\hellosport\exception\CannotFindCommentException.class
+com\hellosport\db\Notification.class
+com\hellosport\db\CommentRepository.class
+com\hellosport\controller\RestController.class
+com\hellosport\exception\DemoEntityExceptionHandler.class
+com\hellosport\db\Member.class
+com\hellosport\exception\ErrorInfo.class
+com\hellosport\db\NotificationRepository.class
+com\hellosport\HelloSportApplication.class
+com\hellosport\config\IndexController.class
+com\hellosport\config\WebSecurity.class
+com\hellosport\exception\CannotFindNotificationException.class

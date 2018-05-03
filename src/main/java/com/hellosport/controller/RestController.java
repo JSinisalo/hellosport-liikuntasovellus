@@ -70,6 +70,28 @@ public class RestController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @Autowired
+    private AdminNotificationRepository adminNotificationRepo;
+    //Admin posts
+    @RequestMapping(value = "/notification/admin", method = RequestMethod.POST)
+    public ResponseEntity<Void> postAdminNotification(@RequestBody AdminNotification a,
+                                                                   UriComponentsBuilder b) {
+
+        adminNotificationRepo.save(a);
+
+        UriComponents uriComponents = b.path("/notifications/admin/{id}").buildAndExpand(a.getId());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(uriComponents.toUri());
+
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/notifications/admin", method = RequestMethod.GET)
+    public Iterable<AdminNotification> getAdminNotifications() {
+        return adminNotificationRepo.findAll();
+    }
+
     //#############################################Comments###################################################
 
 

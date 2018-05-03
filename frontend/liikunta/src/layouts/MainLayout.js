@@ -37,11 +37,15 @@ export default class MainLayout extends Component {
           <div class="row">
             <div className="container">
               <div className="leftColumn">
+              <Link to={{pathname: "/events"}}>
+                <button className="btn btn-primary">Events</button>
+              </Link>
+              <Link to = {{pathname: "/posts"}}>
+                <button className="btn btn-primary">Posts</button>
+              </Link>
               </div>
               <div className="middleColumn">
-              <PostTable selectedComment={(data) => this.handleItemClick(data)} />
-              </div>
-              <div className="rightColumn">
+              {this.props.content}
               </div>
             </div>
           </div>
