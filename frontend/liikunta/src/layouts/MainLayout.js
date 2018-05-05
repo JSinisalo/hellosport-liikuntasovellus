@@ -1,19 +1,30 @@
 import React, {Component} from 'react';
 import { Route } from 'react-router-dom';
 import {Link} from 'react-router-dom';
-import PostTable from '../posts/PostTable'
+import PostTable from '../posts/PostTable';
 import PostForm from '../posts/PostForm';
-import AdminPostTable from '../adminPosts/AdminPostTable'
+import AdminPostTable from '../adminPosts/AdminPostTable';
 import AdminPostForm from '../adminPosts/AdminPostForm';
+import skate from './skate.gif';
 
 export default class MainLayout extends Component {
 
   constructor(props) {
 
     super(props);
-    this.state = {sC: 0};
+    this.state = {sC: 0,showAdmin: false};
 
     this.handleItemClick = this.handleItemClick.bind(this);
+    this.componentWillMount = this.componentWillMount.bind(this);
+  }
+
+  componentWillMount() {
+
+    fetch('http://127.0.0.1:8080/notifications/check')
+        .then(response=>response.json())
+        .then(response => this.setState({
+        showAdmin: response
+        }))
   }
 
   handleItemClick(e) {
@@ -31,45 +42,58 @@ export default class MainLayout extends Component {
 
           <div class="row">
             <div className="header">
-              <div style={{textAlign:"center", marginTop:'100px'}}>
+              <div style={{textAlign:"center", margin:'100px'}}>
                 <h1 class="display-1">HelloSport</h1>
-                <button style={{marginTop:'25px', marginBottom:'15px'}}
+                <button style={{margin: '10px'}}
                         type="button" 
                         className="btn btn-success" 
                         data-toggle="modal" 
                         data-target="#postNotificationModal">Post a new notification!</button>
-                <button style={{marginTop:'25px', marginBottom:'15px'}}
-                        type="button" 
-                        className="btn btn-success" 
-                        data-toggle="modal" 
-                        data-target="#adminPostNotificationModal">Post a new event!</button>
+                { this.state.showAdmin && <EventButton /> }
               </div>
             </div>
           </div>
 
           <div class="row">
-            <div className="container">
-              <div className="leftColumn">
+            <div className="middleColumn">
+              <div style={{textAlign:"center", margin:'10px'}}>
               <Link to={{pathname: "/events"}}>
-                <button className="btn btn-primary">Events</button>
+                <button style={{margin:'5px'}} className="btn btn-primary">Events</button>
               </Link>
               <Link to = {{pathname: "/posts"}}>
-                <button className="btn btn-primary">Posts</button>
+                <button style={{margin:'5px'}} className="btn btn-primary">Posts</button>
               </Link>
               </div>
-              <div className="middleColumn">
-              {this.props.content}
+              <div style={{textAlign:"center"}}>
+                {this.props.content}
               </div>
             </div>
           </div>
           
           <div class="row">
             <div className="footer">
-              <h2>This is footer</h2>
+              <a href="http://localhost:8080/logout"><img src={skate} alt="logo" /></a>
             </div>
           </div>
         </div>
       </div>        
     )
   }
+}
+
+class EventButton extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <button style={{margin: '10px'}}
+                            type="button"
+                            className="btn btn-success"
+                            data-toggle="modal"
+                            data-target="#adminPostNotificationModal">Post a new event!</button>
+        )
+    }
 }
