@@ -4,7 +4,7 @@ import { Route, Switch} from 'react-router-dom';
 import PostForm from './posts/PostForm';
 import PostTable from './posts/PostTable';
 import FullPost from './posts/FullPost';
-import AdminPostTable from './AdminPosts/AdminPostTable';
+import AdminPostTable from './adminPosts/AdminPostTable';
 class App extends Component {
 
   render() {
