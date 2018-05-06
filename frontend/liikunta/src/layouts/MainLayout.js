@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import { Route } from 'react-router-dom';
 import {Link} from 'react-router-dom';
-import PostTable from '../posts/PostTable'
 import PostForm from '../posts/PostForm';
-import AdminPostTable from '../adminPosts/AdminPostTable'
 import AdminPostForm from '../adminPosts/AdminPostForm';
 
 export default class MainLayout extends Component {
@@ -27,10 +24,10 @@ export default class MainLayout extends Component {
         <div className="row">
           <PostForm selectedComment={this.state.sC}/>
           <AdminPostForm selectedComment={this.state.sC}/>
-            <div class="col">
+            <div className="col">
               <div className="header">
                 <div style={{textAlign:"center", marginTop:'100px'}}>
-                  <h1 class="display-1">HelloSport</h1>
+                  <h1 className="display-1">HelloSport</h1>
                   <button style={{marginTop:'25px', marginBottom:'15px'}}
                           type="button" 
                           className="btn btn-success" 
@@ -58,14 +55,18 @@ export default class MainLayout extends Component {
                       Events
                     </a>
                   </Link>
-
+                  <Link to={{pathname: "/profile"}} className='link-style'>
+                    <a href="#" className="list-group-item list-group-item-action list-group-item-info">
+                        Profile
+                    </a>
+                  </Link>
                 </ul>
               </div>
               <div className = "col-sm-9">
                 {this.props.content}
               </div>
         </div>
-        <div class="row">
+        <div className="row">
           <div className="footer">
             <h2>This is footer</h2>
           </div>
