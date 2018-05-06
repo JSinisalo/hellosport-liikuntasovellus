@@ -9,7 +9,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App" class="container-fluid">
+      <div className="container-fluid">
         <Switch>
           <Route exact={true} path="/" component={() => <MainLayout content={<PostTable  />}/>}/>
           <Route path={"/events"} render={(props) => <MainLayout content = {<AdminPostTable {...props} />} />}/>

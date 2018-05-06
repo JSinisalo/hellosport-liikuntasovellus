@@ -25,10 +25,8 @@ export default class MainLayout extends Component {
     return(
       <div className="container">
         <div className="row">
-
           <PostForm selectedComment={this.state.sC}/>
           <AdminPostForm selectedComment={this.state.sC}/>
-
             <div class="col">
               <div className="header">
                 <div style={{textAlign:"center", marginTop:'100px'}}>
@@ -37,7 +35,7 @@ export default class MainLayout extends Component {
                           type="button" 
                           className="btn btn-success" 
                           data-toggle="modal" 
-                          data-target="#postNotificationModal">Post a new notification!</button>
+                          data-target="#postNotificationModal">Post a new notification!</button><br/>
                   <button style={{marginTop:'25px', marginBottom:'15px'}}
                           type="button" 
                           className="btn btn-success" 
@@ -50,27 +48,28 @@ export default class MainLayout extends Component {
           <div className="row">
             <div className ="col-sm-3">
                 <ul className="list-group">
-                    <Link to={{pathname: "/events"}} className='link-style'>
-                      <a href="#" className="list-group-item list-group-item-action list-group-item-info">
-                        Events
-                      </a>
-                    </Link>
-                    <Link to = {{pathname: "/posts"}} className='link-style'>
-                      <a href="#" className="list-group-item list-group-item-action list-group-item-info">
-                        Posts
-                      </a>
-                    </Link>
+                  <Link to = {{pathname: "/posts"}} className='link-style'>
+                    <a href="#" className="list-group-item list-group-item-action list-group-item-info">
+                      Posts
+                    </a>
+                  </Link>
+                  <Link to={{pathname: "/events"}} className='link-style'>
+                    <a href="#" className="list-group-item list-group-item-action list-group-item-info">
+                      Events
+                    </a>
+                  </Link>
+
                 </ul>
               </div>
               <div className = "col-sm-9">
                 {this.props.content}
               </div>
         </div>
-          <div class="row">
-            <div className="footer">
-              <h2>This is footer</h2>
-            </div>
+        <div class="row">
+          <div className="footer">
+            <h2>This is footer</h2>
           </div>
+        </div>
       </div>        
     )
   }
