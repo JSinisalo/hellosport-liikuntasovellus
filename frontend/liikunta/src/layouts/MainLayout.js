@@ -20,7 +20,7 @@ export default class MainLayout extends Component {
 
   componentWillMount() {
 
-    fetch('http://127.0.0.1:8080/notifications/check')
+    fetch('http://127.0.0.1:8080/notifications/check', { method: 'GET', headers: new Headers({ 'X-Requested-With': 'XMLHttpRequest'})})
         .then(response=>response.json())
         .then(response => this.setState({
         showAdmin: response

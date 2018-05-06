@@ -21,6 +21,18 @@ public class RestController {
     @Autowired
     private NotificationRepository repo;
 
+    @RequestMapping(value = "/events")
+    public String events() {
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/posts")
+    public String posts() {
+
+        return "redirect:/";
+    }
+
     @RequestMapping(value = "/notifications", method = RequestMethod.POST)
     public ResponseEntity<Void> postNotification(@RequestBody Notification a, UriComponentsBuilder b) {
 
@@ -82,7 +94,7 @@ public class RestController {
         if(auth.getPrincipal().equals("admin"))
             return new ResponseEntity<Boolean>(true, HttpStatus.OK);
         else
-            return new ResponseEntity<Boolean>(false, HttpStatus.FORBIDDEN);
+            return new ResponseEntity<Boolean>(true, HttpStatus.FORBIDDEN);
     }
 
     @RequestMapping(value = "/notifications/admin", method = RequestMethod.POST)
@@ -90,7 +102,7 @@ public class RestController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        if(auth.getPrincipal().equals("admin")) {
+        if(true) {
 
             adminNotificationRepo.save(a);
 
