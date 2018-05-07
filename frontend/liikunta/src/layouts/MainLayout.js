@@ -3,8 +3,8 @@ import { Route } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import PostTable from '../posts/PostTable'
 import PostForm from '../posts/PostForm';
-import AdminPostTable from '../adminPosts/AdminPostTable'
-import AdminPostForm from '../adminPosts/AdminPostForm';
+import AdminPostTable from '../AdminPosts/AdminPostTable'
+import AdminPostForm from '../AdminPosts/AdminPostForm';
 import skate from './skate.gif';
 
 export default class MainLayout extends Component {

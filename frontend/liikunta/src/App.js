@@ -3,7 +3,7 @@ import MainLayout from './layouts/MainLayout';
 import { Route, Switch} from 'react-router-dom';
 import PostTable from './posts/PostTable';
 import FullPost from './posts/FullPost';
-import AdminPostTable from './adminPosts/AdminPostTable';
+import AdminPostTable from './AdminPosts/AdminPostTable';
 import ProfileConfig from './profile/ProfileConfig';
 class App extends Component {
 
