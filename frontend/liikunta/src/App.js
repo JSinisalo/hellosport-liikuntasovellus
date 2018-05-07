@@ -15,7 +15,7 @@ class App extends Component {
           <Route path={"/events"} render={(props) => <MainLayout content = {<AdminPostTable {...props} />} />}/>
           <Route path={"/post/:postID"} render={(props) => <MainLayout content={<FullPost {...props} />} /> } />
           <Route path={"/posts"} render={(props) => <MainLayout content={<PostTable {...props} />}/>} />        
-          <Route path={"/profile"} render={(props) => <MainLayout content={<ProfileConfig {...props}/>}/>}/>
+          <Route path={"/profile"} render={(props) => <MainLayout content={<ProfileConfig {...props} />}/>}/>
         </Switch>
       </div>
     );

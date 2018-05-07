@@ -46,12 +46,12 @@ export default class MainLayout extends Component {
             <div className ="col-sm-3">
                 <ul className="list-group">
                   <Link to = {{pathname: "/posts"}} className='link-style'>
-                    <a href="#" className="list-group-item list-group-item-action list-group-item-info">
+                    <a href="posts" className="list-group-item list-group-item-action list-group-item-info">
                       Posts
                     </a>
                   </Link>
                   <Link to={{pathname: "/events"}} className='link-style'>
-                    <a href="#" className="list-group-item list-group-item-action list-group-item-info">
+                    <a href="events" className="list-group-item list-group-item-action list-group-item-info">
                       Events
                     </a>
                   </Link>
