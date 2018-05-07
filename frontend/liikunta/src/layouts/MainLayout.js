@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { Route } from 'react-router-dom';
 import {Link} from 'react-router-dom';
-import PostTable from '../posts/PostTable';
+import PostTable from '../posts/PostTable'
 import PostForm from '../posts/PostForm';
-import AdminPostTable from '../adminPosts/AdminPostTable';
+import AdminPostTable from '../adminPosts/AdminPostTable'
 import AdminPostForm from '../adminPosts/AdminPostForm';
 import skate from './skate.gif';
 
@@ -34,46 +34,55 @@ export default class MainLayout extends Component {
   render() {
     
     return(
-      <div class="row">
-        <div class="col">
-
-        <PostForm selectedComment={this.state.sC}/>
-        <AdminPostForm selectedComment={this.state.sC}/>
-
-          <div class="row">
-            <div className="header">
-              <div style={{textAlign:"center", margin:'100px'}}>
-                <h1 class="display-1">HelloSport</h1>
-                <button style={{margin: '10px'}}
-                        type="button" 
-                        className="btn btn-success" 
-                        data-toggle="modal" 
-                        data-target="#postNotificationModal">Post a new notification!</button>
-                { this.state.showAdmin && <EventButton /> }
+      <div className="container">
+        <div className="row">
+          <PostForm selectedComment={this.state.sC}/>
+          <AdminPostForm selectedComment={this.state.sC}/>
+            <div className="col">
+              <div className="header">
+                <div style={{textAlign:"center", marginTop:'100px'}}>
+                  <h1 className="display-1">HelloSport</h1>
+                  <button style={{marginTop:'25px', marginBottom:'15px'}}
+                          type="button"
+                          className="btn btn-success"
+                          data-toggle="modal"
+                          data-target="#postNotificationModal">Post a new notification!</button><br/>
+                  <button style={{marginTop:'25px', marginBottom:'15px'}}
+                          type="button"
+                          className="btn btn-success"
+                          data-toggle="modal"
+                          data-target="#adminPostNotificationModal">Post a new event!</button>
+                </div>
               </div>
             </div>
           </div>
-
-          <div class="row">
-            <div className="middleColumn">
-              <div style={{textAlign:"center", margin:'10px'}}>
-              <Link to={{pathname: "/events"}}>
-                <button style={{margin:'5px'}} className="btn btn-primary">Events</button>
-              </Link>
-              <Link to = {{pathname: "/posts"}}>
-                <button style={{margin:'5px'}} className="btn btn-primary">Posts</button>
-              </Link>
+          <div className="row">
+            <div className ="col-sm-3">
+                <ul className="list-group">
+                  <Link to = {{pathname: "/posts"}} className='link-style'>
+                    <a href="posts" className="list-group-item list-group-item-action list-group-item-info">
+                      Posts
+                    </a>
+                  </Link>
+                  <Link to={{pathname: "/events"}} className='link-style'>
+                    <a href="events" className="list-group-item list-group-item-action list-group-item-info">
+                      Events
+                    </a>
+                  </Link>
+                  <Link to={{pathname: "/profile"}} className='link-style'>
+                    <a href="#" className="list-group-item list-group-item-action list-group-item-info">
+                        Profile
+                    </a>
+                  </Link>
+                </ul>
               </div>
-              <div style={{textAlign:"center"}}>
+              <div className = "col-sm-9">
                 {this.props.content}
               </div>
-            </div>
-          </div>
-          
-          <div class="row">
-            <div className="footer">
-              <a href="http://localhost:8080/logout"><img src={skate} alt="logo" /></a>
-            </div>
+        </div>
+        <div className="row">
+          <div className="footer">
+            <a href="http://localhost:8080/logout"><img src={skate} alt="logo" /></a>
           </div>
         </div>
       </div>        

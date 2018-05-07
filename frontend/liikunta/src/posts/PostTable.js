@@ -28,7 +28,7 @@ export default class PostTable extends Component {
 
   renderPosts(post) {
     if(this.state.activePosts.length > 0) {
-      if(this.state.search.trim() == "") {
+      if(this.state.search.trim() === "") {
         return <Post key={post.id} post={post} currentlySelectedCallback={(data) => {this.props.selectedComment(data)}}/>
       } else if(contains(post.title.toLowerCase(),this.state.search.toLocaleLowerCase())) {
         return <Post key={post.id} post={post} currentlySelectedCallback={(data) => {this.props.selectedComment(data)}}/>
