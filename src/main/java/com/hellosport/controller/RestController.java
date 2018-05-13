@@ -207,6 +207,16 @@ public class RestController {
     }
 
     @CrossOrigin
+    @RequestMapping(value = "/users/{memberID}", method = RequestMethod.PATCH)
+    public void modifyIntroduction( @RequestBody Member member, @PathVariable long memberID) {
+        Member memberExist = memberRepo.findById(memberID).orElse(null);
+        if(memberExist != null) {
+            memberExist.setIntroduction(member.getIntroduction());
+            memberRepo.save(memberExist);
+        }
+    }
+
+    @CrossOrigin
     @RequestMapping(value = "/users/{memberID}", method = RequestMethod.GET)
     public Member getMember(@PathVariable long memberID){
         Member member = memberRepo.findById(memberID).orElse(null);

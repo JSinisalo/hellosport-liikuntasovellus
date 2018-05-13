@@ -17,7 +17,7 @@ class App extends Component {
           <Route path={"/post/:postID"} render={(props) => <MainLayout content={<FullPost {...props} />} /> } />
           <Route path={"/posts"} render={(props) => <MainLayout content={<PostTable {...props} />}/>} />        
           <Route path={"/profile"} render={(props) => <MainLayout content={<ProfileConfig {...props} />}/>}/>
-          <Route path={"/profile/:profileID"} render={(props) => <MainLayout content = {<Profile {...props}/>}/>}/>
+          <Route path={"/profiles/:profileID"} render={(props) => <MainLayout content = {<Profile {...props}/>}/>}/>
         </Switch>
       </div>
     );

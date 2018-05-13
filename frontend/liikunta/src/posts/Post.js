@@ -50,7 +50,7 @@ export default class Post extends Component {
     return (
       <div class="card" style={{width: '80%'}}>
         <div class="card-header">
-          <Link  to={{pathname: "/profile/" + 11}}>
+          <Link  to={{pathname: "/profiles/" + 11}}>
           <small class="form-text text-muted">{this.props.post.authorName + " " + timePosted}</small>
           </Link>
           <h3 style={{marginBottom: '1px'}}>{this.props.post.title}</h3>
