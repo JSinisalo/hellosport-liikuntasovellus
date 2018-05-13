@@ -63,11 +63,9 @@ export default class AdminPostTable extends Component {
     );
     return(
       <div>
-      <input type="text" 
-      name="search" 
-      ref="search"
-      placeholder="Search"
-      onChange={this.handleChange}/>
+        <div style={{textAlign:"center", marginTop:'20px'}}>
+          <input style={{width:"45%", margin: "0 auto"}} class="form-control" type="text" name="search"  ref="search" placeholder="Search" onChange={this.handleChange}/>
+        </div>
 
       <LimitedInfiniteScroll 
       limit={1} 
