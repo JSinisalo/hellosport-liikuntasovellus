@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 import PostForm from '../posts/PostForm';
-import AdminPostForm from '../adminPosts/AdminPostForm';
+import AdminPostForm from '../AdminPosts/AdminPostForm';
+import AdminPostTable from '../AdminPosts/AdminPostTable';
 import skate from './skate.gif';
 
 export default class MainLayout extends Component {
