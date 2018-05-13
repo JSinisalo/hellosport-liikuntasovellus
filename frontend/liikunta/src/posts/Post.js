@@ -65,7 +65,7 @@ export default class Post extends Component {
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="collapse" data-target={"#post" + this.props.post.id} aria-expanded="false" aria-controls={"postControls" + this.props.post.id} >
               Comments
           </button>
-          <button type="button" class="btn btn-success" onClick={() => { this.props.currentlySelectedCallback(this.props.post.id) }} data-toggle="modal" data-target="#postCommentModal">Post a new comment!</button>
+          <button style={{marginLeft:'20px'}} type="button" class="btn btn-success" onClick={() => { this.props.currentlySelectedCallback(this.props.post.id) }} data-toggle="modal" data-target="#postCommentModal">Post a new comment!</button>
           <div class="collapse" id={"post" + this.props.post.id}>
             {this.getComments()}
           </div>
