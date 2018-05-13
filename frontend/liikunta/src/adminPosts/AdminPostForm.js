@@ -22,7 +22,7 @@ export default class AdminPostForm extends Component {
 
   postNotification() {
 
-    fetch('http://localhost:8080/notification/admin', { 
+    fetch('http://localhost:8080/notifications/admin', {
       method: 'POST',
       body: JSON.stringify({
         title: this.state.title,

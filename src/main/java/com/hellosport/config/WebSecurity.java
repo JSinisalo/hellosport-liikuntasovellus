@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -65,13 +66,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
         http.cors().and().csrf().disable()
             .authorizeRequests()
-            .antMatchers("/index.html").authenticated()
+            .antMatchers("/").authenticated()
             .and()
             .formLogin()
-            .loginPage("/login.html").defaultSuccessUrl("/index.html")
+            .loginPage("/login.html").defaultSuccessUrl("/")
             .permitAll()
             .and()
-            .logout()
+            .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login.html")
             .permitAll();
     }
 
@@ -99,6 +100,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                         .roles("USER")
                         .build();
 
-        return new InMemoryUserDetailsManager(user);
+        UserDetails admin =
+                User.withDefaultPasswordEncoder()
+                        .username("admin")
+                        .password("test")
+                        .roles("ADMIN")
+                        .build();
+
+        return new InMemoryUserDetailsManager(user, admin);
     }
 }

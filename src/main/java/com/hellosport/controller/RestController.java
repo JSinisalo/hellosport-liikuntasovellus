@@ -1,12 +1,14 @@
 package com.hellosport.controller;
 
 import com.hellosport.db.*;
-import com.hellosport.exception.CannotFindNotificationException;
 import com.hellosport.exception.CannotFindCommentException;
+import com.hellosport.exception.CannotFindNotificationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -19,6 +21,17 @@ public class RestController {
     @Autowired
     private NotificationRepository repo;
 
+    @RequestMapping(value = "/events")
+    public String events() {
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/posts")
+    public String posts() {
+
+        return "redirect:/";
+    }
 
     @RequestMapping(value = "/notifications", method = RequestMethod.POST)
     public ResponseEntity<Void> postNotification(@RequestBody Notification a, UriComponentsBuilder b) {
@@ -72,32 +85,46 @@ public class RestController {
 
     @Autowired
     private AdminNotificationRepository adminNotificationRepo;
-    //Admin posts
-    @RequestMapping(value = "/notification/admin", method = RequestMethod.POST)
-    public ResponseEntity<Void> postAdminNotification(@RequestBody AdminNotification a,
-                                                                   UriComponentsBuilder b) {
 
-        adminNotificationRepo.save(a);
+    @RequestMapping(value = "/notifications/check", method = RequestMethod.GET)
+    public ResponseEntity<Boolean> checkAdminNotification() {
 
-        UriComponents uriComponents = b.path("/notifications/admin/{id}").buildAndExpand(a.getId());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(uriComponents.toUri());
+        if(auth.getPrincipal().equals("admin"))
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+        else
+            return new ResponseEntity<Boolean>(true, HttpStatus.FORBIDDEN);
+    }
 
-        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+    @RequestMapping(value = "/notifications/admin", method = RequestMethod.POST)
+    public ResponseEntity<Void> postAdminNotification(@RequestBody AdminNotification a, UriComponentsBuilder b) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if(true) {
+
+            adminNotificationRepo.save(a);
+
+            UriComponents uriComponents = b.path("/notifications/admin/{id}").buildAndExpand(a.getId());
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(uriComponents.toUri());
+
+            return new ResponseEntity<>(headers, HttpStatus.CREATED);
+
+        } else {
+
+            HttpHeaders headers = new HttpHeaders();
+
+            return new ResponseEntity<>(headers, HttpStatus.FORBIDDEN);
+        }
     }
 
     @RequestMapping(value = "/notifications/admin", method = RequestMethod.GET)
     public Iterable<AdminNotification> getAdminNotifications() {
         return adminNotificationRepo.findAll();
     }
-
-    //#############################################Comments###################################################
-
-
-    //is this needed?????????????
-    @Autowired
-    private CommentRepository cRepo;
 
     @RequestMapping(value = "notifications/{notificationsId}/comments", method = RequestMethod.POST)
     public ResponseEntity<Void> postComment(@PathVariable long notificationsId, @RequestBody Comment a, UriComponentsBuilder b) throws CannotFindNotificationException {
