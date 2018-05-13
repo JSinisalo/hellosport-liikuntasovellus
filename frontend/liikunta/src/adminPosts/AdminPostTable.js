@@ -28,7 +28,7 @@ export default class AdminPostTable extends Component {
 
   renderPosts(post) {
     if(this.state.activePosts.length > 0) {
-      if(this.state.search.trim() == "") {
+      if(this.state.search.trim() === "") {
         return <AdminPost key={post.id} post={post} currentlySelectedCallback={(data) => {this.props.selectedComment(data)}}/>
       } else if(contains(post.title.toLowerCase(),this.state.search.toLocaleLowerCase())) {
         return <AdminPost key={post.id} post={post} currentlySelectedCallback={(data) => {this.props.selectedComment(data)}}/>

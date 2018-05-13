@@ -40,15 +40,15 @@ body {
   z-index:-2
 }
 
+.link-style a {
+  text-decoration: none;
+}
+
 .card {
   margin: auto;
   margin-top: 20px;
   border: solid 3px #364e96;
   border-radius: 0.5em;
-}
-
-.middleColumn{
-  flex: 4
 }
 
 .Modal {
@@ -74,22 +74,7 @@ body {
 }
 
 
-.leftColumn {
-  flex:1;
-  float: left;
-  border: black;
-  background: gray;
-  
-}
 
-.rightColumn {
-  flex:1;
-  clear: right;
-  float: right;
-  border: black;
-  background: gray;
-  width:20%;
-}
 
 .footer {
   padding: 20px;
@@ -97,6 +82,7 @@ body {
   background: #ddd;
   margin-top: 20px;
   width: 100%;
+  
 }
 
 .radio-inline{
