@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import {Link} from 'react-router-dom';
 export default class Post extends Component {
 
   getComment(c) {
@@ -50,7 +50,9 @@ export default class Post extends Component {
     return (
       <div class="card" style={{width: '80%'}}>
         <div class="card-header">
+          <Link  to={{pathname: "/profiles/" + 11}}>
           <small class="form-text text-muted">{this.props.post.authorName + " " + timePosted}</small>
+          </Link>
           <h3 style={{marginBottom: '1px'}}>{this.props.post.title}</h3>
           <small class="form-text text-muted">Sports: {sport}</small>
           <small class="form-text text-muted">Gender: {gender}</small>

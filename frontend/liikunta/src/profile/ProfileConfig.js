@@ -31,6 +31,7 @@ export default class ProfileConfig extends Component {
              alt="Card image"/>
         <div className="card-body">
           <h4 className="card-title">John Doe</h4>
+          <h6>Sukupuoli</h6>
           <form>
             <textarea className="form-control" 
                       rows="5" 
@@ -47,6 +48,7 @@ export default class ProfileConfig extends Component {
         </div>
         <div className="card-footer">
         <button className="btn btn-primary" 
+                style={{float:"right"}}  
                   disabled = {!enabled}
                   onClick={this.saveChange} >Save</button>     
         </div>

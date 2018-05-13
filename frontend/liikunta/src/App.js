@@ -5,6 +5,7 @@ import PostTable from './posts/PostTable';
 import FullPost from './posts/FullPost';
 import AdminPostTable from './adminPosts/AdminPostTable';
 import ProfileConfig from './profile/ProfileConfig';
+import Profile from './profile/Profile';
 class App extends Component {
 
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
           <Route path={"/post/:postID"} render={(props) => <MainLayout content={<FullPost {...props} />} /> } />
           <Route path={"/posts"} render={(props) => <MainLayout content={<PostTable {...props} />}/>} />        
           <Route path={"/profile"} render={(props) => <MainLayout content={<ProfileConfig {...props} />}/>}/>
+          <Route path={"/profiles/:profileID"} render={(props) => <MainLayout content = {<Profile {...props}/>}/>}/>
         </Switch>
       </div>
     );
