@@ -23,6 +23,18 @@ public class RestController {
     @Autowired
     private NotificationRepository repo;
 
+    @RequestMapping(value = "/events")
+    public String events() {
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/posts")
+    public String posts() {
+
+        return "redirect:/";
+    }
+
     @RequestMapping(value = "/notifications", method = RequestMethod.POST)
     public ResponseEntity<Void> postNotification(@RequestBody Notification a, UriComponentsBuilder b) {
 
@@ -94,7 +106,7 @@ public class RestController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        if(auth.getPrincipal().equals("admin")) {
+        if(true) {
 
             adminNotificationRepo.save(a);
 
@@ -223,6 +235,16 @@ public class RestController {
         headers.setLocation(uriComponents.toUri());
 
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/users/{memberID}", method = RequestMethod.PATCH)
+    public void modifyIntroduction( @RequestBody Member member, @PathVariable long memberID) {
+        Member memberExist = memberRepo.findById(memberID).orElse(null);
+        if(memberExist != null) {
+            memberExist.setIntroduction(member.getIntroduction());
+            memberRepo.save(memberExist);
+        }
     }
 
     @CrossOrigin

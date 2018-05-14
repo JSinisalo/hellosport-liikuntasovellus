@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
-import { Route } from 'react-router-dom';
-import {Link} from 'react-router-dom';
-import PostTable from '../posts/PostTable'
+import {NavLink} from 'react-router-dom';
 import PostForm from '../posts/PostForm';
-import AdminPostTable from '../AdminPosts/AdminPostTable'
-import AdminPostForm from '../AdminPosts/AdminPostForm';
+import AdminPostForm from '../adminPosts/AdminPostForm';
 import skate from './skate.gif';
 
 export default class MainLayout extends Component {
@@ -12,19 +9,9 @@ export default class MainLayout extends Component {
   constructor(props) {
 
     super(props);
-    this.state = {sC: 0,showAdmin: false};
+    this.state = {sC: 0};
 
     this.handleItemClick = this.handleItemClick.bind(this);
-    this.componentWillMount = this.componentWillMount.bind(this);
-  }
-
-  componentWillMount() {
-
-    fetch('http://127.0.0.1:8080/notifications/check')
-        .then(response=>response.json())
-        .then(response => this.setState({
-        showAdmin: response
-        }))
   }
 
   handleItemClick(e) {
@@ -34,52 +21,56 @@ export default class MainLayout extends Component {
   render() {
     
     return(
-      <div className="container">
+      <div>
         <div className="row">
           <PostForm selectedComment={this.state.sC}/>
           <AdminPostForm selectedComment={this.state.sC}/>
             <div className="col">
-              <div className="header">
-                <div style={{textAlign:"center", marginTop:'100px'}}>
-                  <h1 className="display-1">HelloSport</h1>
-                  <button style={{marginTop:'25px', marginBottom:'15px'}}
-                          type="button"
-                          className="btn btn-success"
-                          data-toggle="modal"
-                          data-target="#postNotificationModal">Post a new notification!</button><br/>
-                  <button style={{marginTop:'25px', marginBottom:'15px'}}
-                          type="button"
-                          className="btn btn-success"
-                          data-toggle="modal"
-                          data-target="#adminPostNotificationModal">Post a new event!</button>
+              <div className="row">
+                <div className="header">
+                  <div style={{textAlign:"center", marginTop:'100px'}}>
+                    <h1 className="display-1">HelloSport</h1>
+                    <button style={{margin:'20px', marginTop:'30px'}}
+                            type="button" 
+                            className="btn btn-success" 
+                            data-toggle="modal" 
+                            data-target="#postNotificationModal">Post a new notification!</button>
+                    <button style={{margin:'20px', marginTop:'30px'}}
+                            type="button" 
+                            className="btn btn-success" 
+                            data-toggle="modal" 
+                            data-target="#adminPostNotificationModal">Post a new event!</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className ="col-sm-3">
-                <ul className="list-group">
-                  <Link to = {{pathname: "/posts"}} className='link-style'>
-                    <a href="posts" className="list-group-item list-group-item-action list-group-item-info">
-                      Posts
-                    </a>
-                  </Link>
-                  <Link to={{pathname: "/events"}} className='link-style'>
-                    <a href="events" className="list-group-item list-group-item-action list-group-item-info">
-                      Events
-                    </a>
-                  </Link>
-                  <Link to={{pathname: "/profile"}} className='link-style'>
-                    <a href="#" className="list-group-item list-group-item-action list-group-item-info">
-                        Profile
-                    </a>
-                  </Link>
-                </ul>
-              </div>
-              <div className = "col-sm-9">
-                {this.props.content}
-              </div>
-        </div>
+          <div class="container">
+            <div className="row">
+              <div className ="col-sm-3" style={{marginTop:'20px'}}>
+                  <ul className="list-group">
+                    <NavLink to = {{pathname: "/posts"}} className='link-style' activeClassName="active-style" onlyActiveOnIndex>
+                      <div className="list-group-item list-group-item-action list-group-item-info">
+                        Posts
+                      </div>
+                    </NavLink>
+                    <NavLink to={{pathname: "/events"}} className='link-style' activeClassName="active-style" onlyActiveOnIndex>
+                      <div className="list-group-item list-group-item-action list-group-item-info">
+                        Events
+                      </div>
+                    </NavLink>
+                    <NavLink to={{pathname: "/profile"}} className='link-style' activeClassName="active-style" onlyActiveOnIndex>
+                      <div className="list-group-item list-group-item-action list-group-item-info">
+                          Profile
+                      </div>
+                    </NavLink>
+                  </ul>
+                </div>
+                <div className = "col-sm-9">
+                  {this.props.content}
+                </div>
+            </div>
+          </div>
         <div className="row">
           <div className="footer">
             <a href="http://localhost:8080/logout"><img src={skate} alt="logo" /></a>
@@ -88,21 +79,4 @@ export default class MainLayout extends Component {
       </div>        
     )
   }
-}
-
-class EventButton extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <button style={{margin: '10px'}}
-                            type="button"
-                            className="btn btn-success"
-                            data-toggle="modal"
-                            data-target="#adminPostNotificationModal">Post a new event!</button>
-        )
-    }
 }

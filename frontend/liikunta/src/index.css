@@ -44,6 +44,11 @@ body {
   text-decoration: none;
 }
 
+.active-style {
+  text-emphasis-color: gold;
+  font-weight:bold;
+}
+
 .card {
   margin: auto;
   margin-top: 20px;

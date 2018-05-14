@@ -1,9 +1,6 @@
 package com.hellosport;
 
-import com.hellosport.db.Comment;
-import com.hellosport.db.CommentRepository;
-import com.hellosport.db.Notification;
-import com.hellosport.db.NotificationRepository;
+import com.hellosport.db.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +15,9 @@ public class HelloSportApplication implements CommandLineRunner {
 
 	@Autowired
     NotificationRepository notificationRepository;
+
+	@Autowired
+	AdminNotificationRepository adminNotificationRepo;
 
 	@Autowired
     CommentRepository commentRepository;
@@ -42,9 +42,8 @@ public class HelloSportApplication implements CommandLineRunner {
 		post.addComment(new Comment("Jooga sucks", "Pete Peltomaa"));
 		notificationRepository.save(post);
 
-		post = new Notification("Koripalloa Unisportil", "25. päivä tätä kuuta.", "Jaakko Joku",
-				Instant.now().getEpochSecond(), Instant.now().getEpochSecond() + Instant.now().getEpochSecond(),
-				new ArrayList<>(Arrays.asList("Male")), new ArrayList<>(Arrays.asList("Koripallo")));
-		notificationRepository.save(post);
+		AdminNotification apost = new AdminNotification("Koripalloa Unisportil", "25. päivä tätä kuuta.", "UNISPORT",
+				Instant.now().getEpochSecond());
+		adminNotificationRepo.save(apost);
 	}
 }
