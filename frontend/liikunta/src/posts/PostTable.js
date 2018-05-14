@@ -30,7 +30,7 @@ export default class PostTable extends Component {
     if(this.state.activePosts.length > 0) {
       if(this.state.search.trim() === "") {
         return <Post key={post.id} post={post} currentlySelectedCallback={(data) => {this.props.selectedComment(data)}}/>
-      } else if(contains(post.title.toLowerCase(),this.state.search.toLocaleLowerCase())) {
+      } else if(this.postHasSport(post, this.state.search)) {
         return <Post key={post.id} post={post} currentlySelectedCallback={(data) => {this.props.selectedComment(data)}}/>
       } 
 
@@ -38,7 +38,14 @@ export default class PostTable extends Component {
       return <p>Loading...</p>
     }
   }
-  
+
+  postHasSport(post, sportName) {
+    for (let i = 0; i < post.sport.length; i++) {
+      if (contains(post.sport[i].toLowerCase(), sportName.toLowerCase())) return true;
+    }
+    return false;
+  }
+
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value});
   }
