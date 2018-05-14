@@ -6,13 +6,35 @@ import AdminPostTable from '../AdminPosts/AdminPostTable';
 
 
 export default class NavBar extends Component {
-  
+
+  constructor(props) {
+    super(props);
+    this.state = {isAdmin: false};
+  }
+
+  componentWillMount(){
+      fetch('/notifications/check', {
+               credentials: 'same-origin'
+             })
+          .then(response => response.json())
+          .then(response => {
+          this.setState({
+          isAdmin: response
+          });
+          console.log(response)
+          });
+    }
+
   render() {
-    
+    var adminButton = [];
+    if (this.state.isAdmin === true) {
+        adminButton.push(<a class="dropdown-item" data-toggle="modal" data-target="#adminPostNotificationModal">New Event</a>)
+    }
+
     return(
 
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a className="navbar-brand" href="/posts">Hello Sport</a>
+        <a className="navbar-brand" href="/">Hello Sport</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
         </button>
@@ -39,7 +61,7 @@ export default class NavBar extends Component {
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" data-toggle="modal" data-target="#postNotificationModal">New Notification</a>
-                <a class="dropdown-item" data-toggle="modal" data-target="#adminPostNotificationModal">New Event</a>
+                {adminButton}
               </div>
             </li>
           </ul>
