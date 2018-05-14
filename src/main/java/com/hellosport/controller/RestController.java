@@ -92,11 +92,22 @@ public class RestController {
     public ResponseEntity<Boolean> checkAdminNotification() {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) auth.getPrincipal();
+        System.out.println(auth.toString());
 
-        if (userDetails.getAuthorities().toString().contains("ROLE_ADMIN")) {
-            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
-        } else {
+        try {
+            UserDetails userDetails = (UserDetails) auth.getPrincipal();
+
+            if (userDetails.getAuthorities().toString().contains("ROLE_ADMIN")) {
+                return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<Boolean>(false, HttpStatus.FORBIDDEN);
+            }
+        } catch (ClassCastException e) {
+            //e.printStackTrace();
+
+            String out = auth.getPrincipal().toString();
+            System.out.println(out);
+
             return new ResponseEntity<Boolean>(false, HttpStatus.FORBIDDEN);
         }
     }

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 import PostForm from '../posts/PostForm';
-import AdminPostForm from '../adminPosts/AdminPostForm';
+import AdminPostForm from '../AdminPosts/AdminPostForm';
 import skate from './skate.gif';
 
 export default class MainLayout extends Component {
@@ -17,9 +17,30 @@ export default class MainLayout extends Component {
   handleItemClick(e) {
       this.setState({sC: e});
   }
+
+  componentWillMount(){
+          fetch('/notifications/check', {
+                                           credentials: 'same-origin'
+                                         })
+              .then(response => response.json())
+              .then(response => {
+                  this.setState({
+                      isAdmin: response
+                  });
+                  console.log(response)
+              });
+      }
   
   render() {
-    
+    var adminButton = [];
+    if (this.state.isAdmin === true) {
+      adminButton.push( <button style={{margin:'20px', marginTop:'30px'}}
+                        type="button"
+                        className="btn btn-success"
+                        data-toggle="modal"
+                        data-target="#adminPostNotificationModal">Post a new event!</button>);
+    }
+
     return(
       <div>
         <div className="row">
@@ -35,11 +56,7 @@ export default class MainLayout extends Component {
                             className="btn btn-success" 
                             data-toggle="modal" 
                             data-target="#postNotificationModal">Post a new notification!</button>
-                    <button style={{margin:'20px', marginTop:'30px'}}
-                            type="button" 
-                            className="btn btn-success" 
-                            data-toggle="modal" 
-                            data-target="#adminPostNotificationModal">Post a new event!</button>
+                    {adminButton}
                   </div>
                 </div>
               </div>
