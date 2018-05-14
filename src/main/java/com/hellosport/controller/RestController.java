@@ -80,12 +80,13 @@ public class RestController {
     public ResponseEntity<Boolean> checkAdminNotification() {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
 
-
-        if(auth.getPrincipal().equals("admin"))
+        if (userDetails.getAuthorities().toString().contains("ROLE_ADMIN")) {
             return new ResponseEntity<Boolean>(true, HttpStatus.OK);
-        else
+        } else {
             return new ResponseEntity<Boolean>(false, HttpStatus.FORBIDDEN);
+        }
     }
 
     @RequestMapping(value = "/notifications/admin", method = RequestMethod.POST)
