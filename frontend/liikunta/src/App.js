@@ -10,7 +10,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      
         <Switch>
           <Route exact={true} path="/" component={() => <MainLayout content={<PostTable  />}/>}/>
           <Route path={"/events"} render={(props) => <MainLayout content = {<AdminPostTable {...props} />} />}/>
@@ -19,7 +19,7 @@ class App extends Component {
           <Route path={"/profile"} render={(props) => <MainLayout content={<ProfileConfig {...props} />}/>}/>
           <Route path={"/profiles/:profileID"} render={(props) => <MainLayout content = {<Profile {...props}/>}/>}/>
         </Switch>
-      </div>
+      
     );
   }
 }

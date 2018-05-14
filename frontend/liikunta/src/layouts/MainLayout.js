@@ -4,6 +4,7 @@ import PostForm from '../posts/PostForm';
 import AdminPostForm from '../AdminPosts/AdminPostForm';
 import AdminPostTable from '../AdminPosts/AdminPostTable';
 import skate from './skate.gif';
+import NavBar from './NavBar';
 
 export default class MainLayout extends Component {
 
@@ -45,33 +46,15 @@ export default class MainLayout extends Component {
                 </div>
               </div>
             </div>
+        </div>
+        <NavBar></NavBar>
+        <div className="container">
+          <div className="row">
+              <div className = "col-sm-9">
+                {this.props.content}
+              </div>
           </div>
-          <div class="container">
-            <div className="row">
-              <div className ="col-sm-3" style={{marginTop:'20px'}}>
-                  <ul className="list-group">
-                    <NavLink to = {{pathname: "/posts"}} className='link-style' activeClassName="active-style" onlyActiveOnIndex>
-                      <div className="list-group-item list-group-item-action list-group-item-info">
-                        Posts
-                      </div>
-                    </NavLink>
-                    <NavLink to={{pathname: "/events"}} className='link-style' activeClassName="active-style" onlyActiveOnIndex>
-                      <div className="list-group-item list-group-item-action list-group-item-info">
-                        Events
-                      </div>
-                    </NavLink>
-                    <NavLink to={{pathname: "/profile"}} className='link-style' activeClassName="active-style" onlyActiveOnIndex>
-                      <div className="list-group-item list-group-item-action list-group-item-info">
-                          Profile
-                      </div>
-                    </NavLink>
-                  </ul>
-                </div>
-                <div className = "col-sm-9">
-                  {this.props.content}
-                </div>
-            </div>
-          </div>
+        </div>
         <div className="row">
           <div className="footer">
             <a href="http://localhost:8080/logout"><img src={skate} alt="logo" /></a>
