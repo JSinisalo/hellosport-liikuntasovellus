@@ -15,7 +15,7 @@ export default class PostForm extends Component {
         commentAuthorName: "",
         commentTextBody: ""
       };
-    	
+    
     this.postNotification = this.postNotification.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -51,7 +51,7 @@ export default class PostForm extends Component {
 
   postComment() {
 
-    fetch('http://localhost:8080/notifications/' + this.props.selectedComment + '/comments', { 
+    fetch('http://localhost:8080/notifications/' + window.selectedComment + '/comments', { 
 
       method: 'POST',
 

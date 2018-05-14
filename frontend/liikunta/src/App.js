@@ -8,6 +8,15 @@ import ProfileConfig from './profile/ProfileConfig';
 import Profile from './profile/Profile';
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+    this.componentWillMount = this.componentWillMount.bind(this);
+  }
+
+  componentWillMount() {
+    window.selectedComment = 0;
+  }
+
   render() {
     return (
       
