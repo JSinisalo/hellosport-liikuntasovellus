@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -90,11 +92,24 @@ public class RestController {
     public ResponseEntity<Boolean> checkAdminNotification() {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.toString());
 
-        if(auth.getPrincipal().equals("admin"))
-            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
-        else
-            return new ResponseEntity<Boolean>(true, HttpStatus.FORBIDDEN);
+        try {
+            UserDetails userDetails = (UserDetails) auth.getPrincipal();
+
+            if (userDetails.getAuthorities().toString().contains("ROLE_ADMIN")) {
+                return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<Boolean>(false, HttpStatus.FORBIDDEN);
+            }
+        } catch (ClassCastException e) {
+            //e.printStackTrace();
+
+            String out = auth.getPrincipal().toString();
+            System.out.println(out);
+
+            return new ResponseEntity<Boolean>(false, HttpStatus.FORBIDDEN);
+        }
     }
 
     @RequestMapping(value = "/notifications/admin", method = RequestMethod.POST)
