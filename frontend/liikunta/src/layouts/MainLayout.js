@@ -49,25 +49,19 @@ export default class MainLayout extends Component {
           <PostForm selectedComment={this.state.sC}/>
           <AdminPostForm selectedComment={this.state.sC}/>
             <div className="col">
-              <div className="row">
-                <div className="header">
-                  <div style={{textAlign:"center", marginTop:'100px'}}>
-                    <h1 className="display-1">HelloSport</h1>
-                    <button style={{margin:'20px', marginTop:'30px'}}
-                            type="button" 
-                            className="btn btn-success" 
-                            data-toggle="modal" 
-                            data-target="#postNotificationModal">Post a new notification!</button>
-                    {adminButton}
-                  </div>
+            <div className="row">
+              <div className="header">
+                <div style={{textAlign:"center", marginTop:'100px'}}>
+                  <h1 className="display-1">HelloSport</h1>
                 </div>
               </div>
             </div>
+          </div>
         </div>
         <NavBar></NavBar>
         <div className="container">
           <div className="row">
-              <div className = "col-sm-9">
+              <div className = "col-sm-7" style={{margin:"auto"}}>
                 {this.props.content}
               </div>
           </div>
