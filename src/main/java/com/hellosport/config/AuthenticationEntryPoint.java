@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Authentication entry point for handling the authenticated endpoints.
+ * Authentication entry point for handling the authenticated endpoints. Not actually used, but if you want http basic then use this.
  */
 @Component
 public class AuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
