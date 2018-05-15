@@ -24,13 +24,13 @@ The project can also be found at https://github.com/JSinisalo/hellosport-liikunt
 
 Things that you should attempt to do:
 
-HAKA/TAMK login and user profiles instead of the placeholder ones right now
-If the site gets many posts they will just be a gigantic list so maybe have pages instead of a page
-Some way to mark posts that have been "fulfilled" maybe gray them out or just delete them
-Users can delete and modify their own posts/comments
-User gets notifications of new posts or something
-Users can view other users profiles
-Contact the client every week and dont lose your scrummaster half way and do nothing for the rest of the time
+-HAKA/TAMK login and user profiles instead of the placeholder ones right now
+-If the site gets many posts they will just be a gigantic list so maybe have pages instead of a page
+-Some way to mark posts that have been "fulfilled" maybe gray them out or just delete them
+--Users can delete and modify their own posts/comments
+-User gets notifications of new posts or something
+-Users can view other users profiles
+-Contact the client every week and dont lose your scrummaster half way and do nothing for the rest of the time
 
 -Find a way to make people excercise 
 
