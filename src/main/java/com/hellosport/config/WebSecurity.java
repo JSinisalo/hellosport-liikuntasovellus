@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -16,6 +17,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+ * The type Web security.
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
@@ -60,21 +64,29 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     }
     */
 
+    /**
+     * Configures the security for this app. Any requests have to be authenticated and if not redirects to the login page.
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.cors().and().csrf().disable()
             .authorizeRequests()
-            .antMatchers("/index.html").authenticated()
+            .antMatchers("/").authenticated()
             .and()
             .formLogin()
-            .loginPage("/login.html").defaultSuccessUrl("/index.html")
+            .loginPage("/login.html").defaultSuccessUrl("/")
             .permitAll()
             .and()
-            .logout()
+            .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login.html")
             .permitAll();
     }
 
+    /**
+     * Cors configuration. Disables cors entirely for simplicity now. Enable in a real app and deal with the stuff.
+     *
+     * @return the cors configuration source
+     */
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
 
@@ -87,10 +99,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         return source;
     }
 
+    /**
+     * User details for jeppe and admin.
+     */
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
-
 
         UserDetails user =
                 User.withDefaultPasswordEncoder()
@@ -99,6 +113,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                         .roles("USER")
                         .build();
 
-        return new InMemoryUserDetailsManager(user);
+        UserDetails admin =
+                User.withDefaultPasswordEncoder()
+                        .username("admin")
+                        .password("test")
+                        .roles("ADMIN")
+                        .build();
+
+        return new InMemoryUserDetailsManager(user, admin);
     }
 }

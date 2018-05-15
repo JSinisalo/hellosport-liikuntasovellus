@@ -1,9 +1,6 @@
 package com.hellosport;
 
-import com.hellosport.db.Comment;
-import com.hellosport.db.CommentRepository;
-import com.hellosport.db.Notification;
-import com.hellosport.db.NotificationRepository;
+import com.hellosport.db.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,19 +10,42 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The main class for this application.
+ */
 @SpringBootApplication
 public class HelloSportApplication implements CommandLineRunner {
 
-	@Autowired
+    /**
+     * The Notification repository. Stores all notifications, which in turn hold their comments
+     */
+    @Autowired
     NotificationRepository notificationRepository;
 
-	@Autowired
+    /**
+     * The Admin notification repo. Stores all "events"
+     */
+    @Autowired
+	AdminNotificationRepository adminNotificationRepo;
+
+    /**
+     * The Comment repository. Doesnt actually do anything.
+     */
+    @Autowired
     CommentRepository commentRepository;
 
-	public static void main(String[] args) {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
+    public static void main(String[] args) {
 		SpringApplication.run(HelloSportApplication.class, args);
 	}
 
+    /**
+     * Called after spring has initialized its stuff. Adds a few premade posts for testing.
+     */
 	@Override
 	public void run(String... args) throws Exception {
 
@@ -42,9 +62,8 @@ public class HelloSportApplication implements CommandLineRunner {
 		post.addComment(new Comment("Jooga sucks", "Pete Peltomaa"));
 		notificationRepository.save(post);
 
-		post = new Notification("Koripalloa Unisportil", "25. päivä tätä kuuta.", "Jaakko Joku",
-				Instant.now().getEpochSecond(), Instant.now().getEpochSecond() + Instant.now().getEpochSecond(),
-				new ArrayList<>(Arrays.asList("Male")), new ArrayList<>(Arrays.asList("Koripallo")));
-		notificationRepository.save(post);
+		AdminNotification apost = new AdminNotification("Koripalloa Unisportil", "25. päivä tätä kuuta.", "UNISPORT",
+				Instant.now().getEpochSecond());
+		adminNotificationRepo.save(apost);
 	}
 }

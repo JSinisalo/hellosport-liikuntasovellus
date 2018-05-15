@@ -28,7 +28,7 @@ export default class PostTable extends Component {
 
   renderPosts(post) {
     if(this.state.activePosts.length > 0) {
-      if(this.state.search.trim() == "") {
+      if(this.state.search.trim() === "") {
         return <Post key={post.id} post={post} currentlySelectedCallback={(data) => {this.props.selectedComment(data)}}/>
       } else if(contains(post.title.toLowerCase(),this.state.search.toLocaleLowerCase())) {
         return <Post key={post.id} post={post} currentlySelectedCallback={(data) => {this.props.selectedComment(data)}}/>
@@ -63,11 +63,9 @@ export default class PostTable extends Component {
     );
     return(
       <div>
-      <input type="text" 
-      name="search" 
-      ref="search"
-      placeholder="Search"
-      onChange={this.handleChange}/>
+        <div style={{textAlign:"center", marginTop:'20px'}}>
+          <input style={{width:"45%", margin: "0 auto"}} class="form-control" type="text" name="search"  ref="search" placeholder="Search" onChange={this.handleChange}/>
+        </div>
 
       <LimitedInfiniteScroll 
       limit={1} 
