@@ -17,6 +17,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+ * The type Web security.
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
@@ -61,6 +64,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     }
     */
 
+    /**
+     * Configures the security for this app. Any requests have to be authenticated and if not redirects to the login page.
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -76,6 +82,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             .permitAll();
     }
 
+    /**
+     * Cors configuration. Disables cors entirely for simplicity now. Enable in a real app and deal with the stuff.
+     *
+     * @return the cors configuration source
+     */
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
 
@@ -88,10 +99,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         return source;
     }
 
+    /**
+     * User details for jeppe and admin.
+     */
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
-
 
         UserDetails user =
                 User.withDefaultPasswordEncoder()

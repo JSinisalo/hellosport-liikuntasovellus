@@ -10,22 +10,42 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The main class for this application.
+ */
 @SpringBootApplication
 public class HelloSportApplication implements CommandLineRunner {
 
-	@Autowired
+    /**
+     * The Notification repository. Stores all notifications, which in turn hold their comments
+     */
+    @Autowired
     NotificationRepository notificationRepository;
 
-	@Autowired
+    /**
+     * The Admin notification repo. Stores all "events"
+     */
+    @Autowired
 	AdminNotificationRepository adminNotificationRepo;
 
-	@Autowired
+    /**
+     * The Comment repository. Doesnt actually do anything.
+     */
+    @Autowired
     CommentRepository commentRepository;
 
-	public static void main(String[] args) {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
+    public static void main(String[] args) {
 		SpringApplication.run(HelloSportApplication.class, args);
 	}
 
+    /**
+     * Called after spring has initialized its stuff. Adds a few premade posts for testing.
+     */
 	@Override
 	public void run(String... args) throws Exception {
 
