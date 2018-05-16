@@ -8,7 +8,7 @@ export default class PostTable extends Component {
     super(props);
     this.state = {
       search:"",
-      activePosts: [],
+      activePosts:[],
       posts:[],
       totalPosts: 2
     }
@@ -63,8 +63,7 @@ export default class PostTable extends Component {
   }
 
   render() {
-
-    let postList = 
+    let postList =
       this.state.activePosts.slice(0).reverse().map((post) =>
       this.renderPosts(post)
     );
