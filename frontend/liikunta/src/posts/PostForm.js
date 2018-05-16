@@ -30,15 +30,15 @@ export default class PostForm extends Component {
     let startEpoch = new Date(this.state.searchStart).valueOf()/1000 // converting the dates to epoch
     let endEpoch = new Date(this.state.searchEnd).valueOf()/1000
 
-    fetch('http://localhost:8080/notifications', { 
+    fetch('/notifications', {
 
       method: 'POST',
-
+      credentials: 'same-origin',
       body: JSON.stringify({
 
         title: this.state.title,
         textBody: this.state.textBody,
-        authorName: this.state.authorName,
+        authorName: "",//this.state.authorName,
         searchStart: startEpoch,
         searchEnd: endEpoch,
         gender: this.state.gender.split(' '),
@@ -51,13 +51,13 @@ export default class PostForm extends Component {
 
   postComment() {
 
-    fetch('http://localhost:8080/notifications/' + window.selectedComment + '/comments', { 
+    fetch('/notifications/' + window.selectedComment + '/comments', {
 
       method: 'POST',
-
+      credentials: 'same-origin',
       body: JSON.stringify({
 
-        author: this.state.commentAuthorName,
+        author: "",//this.state.commentAuthorName,
         textbody: this.state.commentTextBody
 
       }),
@@ -71,7 +71,6 @@ export default class PostForm extends Component {
     const enabled =
           title.length > 0 &&
           textBody.length > 0 &&
-          authorName.length > 0 &&
           searchStart.length > 0 &&
           searchEnd.length > 0 &&
           gender.length > 0 &&
@@ -79,7 +78,6 @@ export default class PostForm extends Component {
 
     const { commentAuthorName, commentTextBody } = this.state;
     const cenabled =
-          commentAuthorName.length > 0 &&
           commentTextBody.length > 0;
 
     return(
@@ -99,12 +97,6 @@ export default class PostForm extends Component {
                     <label htmlFor="title" className="col-sm-2 col-form-label">Title:</label>
                     <div className="col-sm-10">
                       <input className="form-control" type="text" id="title" name="title" ref="title" onChange={this.handleChange} value={this.state.title} placeholder="Title of your notification" required/>
-                    </div>
-                  </div>
-                  <div className="form-group row">
-                    <label htmlFor="authorName" className="col-sm-2 col-form-label">Author:</label>
-                    <div className="col-sm-10">
-                      <input className="form-control" type="text" id="authorName" name="authorName" ref="authorName" onChange={this.handleChange} value={this.state.authorName} placeholder="Your name, nickname, etc..." required/>
                     </div>
                   </div>
                   <div className="form-group row">
@@ -159,12 +151,6 @@ export default class PostForm extends Component {
               </div>
               <div className="modal-body">
                 <form>
-                  <div className="form-group row">
-                    <label htmlFor="commentAuthorName" className="col-sm-2 col-form-label">Author:</label>
-                    <div className="col-sm-10">
-                      <input className="form-control" type="text" id="commentAuthorName" name="commentAuthorName" ref="commentAuthorName" onChange={this.handleChange} value={this.state.commentAuthorName} placeholder="Your name, nickname, etc..." required/>
-                    </div>
-                  </div>
                   <div className="form-group row">
                     <label htmlFor="commentTextBody" className="col-sm-2 col-form-label">Comment:</label>
                     <div className="col-sm-10">

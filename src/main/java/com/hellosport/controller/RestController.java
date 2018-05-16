@@ -57,6 +57,7 @@ public class RestController {
     @RequestMapping(value = "/notifications", method = RequestMethod.POST)
     public ResponseEntity<Void> postNotification(@RequestBody Notification a, UriComponentsBuilder b) {
 
+        a.setAuthorName(SecurityContextHolder.getContext().getAuthentication().getName());
         repo.save(a);
 
         UriComponents uriComponents = b.path("/notifications/{id}").buildAndExpand(a.getId());
@@ -135,7 +136,7 @@ public class RestController {
     public ResponseEntity<Boolean> checkAdminNotification() {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(auth.toString());
+        //System.out.println(auth.toString());
 
         try {
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
@@ -153,6 +154,25 @@ public class RestController {
 
             return new ResponseEntity<Boolean>(false, HttpStatus.FORBIDDEN);
         }
+    }
+
+    /**
+     * Returns the name of the person logged in.
+     *
+     * @return name
+     */
+    @RequestMapping(value = "/notifications/checkname", method = RequestMethod.GET)
+    public ResponseEntity<String> checkMemberName() {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.toString());
+
+        String name = auth.getName();
+        if (name.toLowerCase().equals("anonymoususer")) {
+            return new ResponseEntity<>("", HttpStatus.FORBIDDEN);
+        }
+
+        return new ResponseEntity<>(name, HttpStatus.OK);
     }
 
     /**
@@ -213,7 +233,7 @@ public class RestController {
         if (!opt.isPresent()) throw new CannotFindNotificationException(notificationsId);
 
         Notification notification = opt.get();
-
+        a.setAuthor(SecurityContextHolder.getContext().getAuthentication().getName());
         notification.addComment(a);
         repo.save(notification);
 
