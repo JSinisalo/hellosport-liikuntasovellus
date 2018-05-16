@@ -2,6 +2,25 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 export default class Post extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {isName:false};
+  }
+
+  componentWillMount(){
+      fetch('/notifications/checkname', {
+               credentials: 'same-origin'
+             })
+          .then(response => response.json())
+          .then(response => {
+          if (response == this.props.post.authorName) {
+            this.setState({isName:true});
+          }
+          console.log(response)
+          console.log(this.props.post.authorName)
+          });
+    }
+
   getComment(c) {
 
     let d = new Date(0);
@@ -47,6 +66,20 @@ export default class Post extends Component {
     d.setUTCSeconds(this.props.post.searchEnd);
     const searchEnd = d.toDateString();
 
+    let deleteButton = []
+    console.log(this.state.isName)
+    if (this.state.isName === true) {
+      deleteButton.push(
+          <button style={{marginLeft:'20px'}} type="button" class="btn btn-warning" onClick={() => {
+       fetch('/notifications'+this.props.post.id, {
+
+             method: 'DELETE'
+       })}}>Delete</button>)
+     }
+
+     let cenabled = true;
+     if (this.props.post.comments.length === 0) cenabled = false;
+
     return (
       <div class="card" style={{width: '80%'}}>
         <div class="card-header">
@@ -64,10 +97,11 @@ export default class Post extends Component {
           <small class="form-text text-muted">Timeframe: {searchStart} - {searchEnd}</small>
         </div>
         <div class="card-body">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="collapse" data-target={"#post" + this.props.post.id} aria-expanded="false" aria-controls={"postControls" + this.props.post.id} >
+          <button class="btn btn-primary dropdown-toggle" disabled={!cenabled} type="button" data-toggle="collapse" data-target={"#post" + this.props.post.id} aria-expanded="false" aria-controls={"postControls" + this.props.post.id} >
               Comments
           </button>
           <button style={{marginLeft:'20px'}} type="button" class="btn btn-success" onClick={() => { window.selectedComment = this.props.post.id; }} data-toggle="modal" data-target="#postCommentModal">Post a new comment!</button>
+          {deleteButton}
           <div class="collapse" id={"post" + this.props.post.id}>
             {this.getComments()}
           </div>
