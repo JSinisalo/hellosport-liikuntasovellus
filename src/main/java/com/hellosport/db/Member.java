@@ -3,7 +3,7 @@ package com.hellosport.db;
 import javax.persistence.*;
 
 /**
- * Created by possumunnki on 19.4.2018.
+ * Member class for upcoming member feature. Isnt actually used anywhere yet.
  */
 @Entity
 public class Member {
@@ -25,9 +25,20 @@ public class Member {
 
     private boolean administrator = false;
 
+    /**
+     * Instantiates a new Member.
+     */
     public Member() {
     }
 
+    /**
+     * Instantiates a new Member.
+     *
+     * @param userName      the user name
+     * @param gender        the gender
+     * @param registered    the registered
+     * @param administrator the administrator
+     */
     public Member(String userName, String gender, long registered, boolean administrator) {
         this.userName = userName;
         this.gender = gender;
@@ -35,6 +46,15 @@ public class Member {
         this.administrator = administrator;
     }
 
+    /**
+     * Instantiates a new Member.
+     *
+     * @param userName      the user name
+     * @param gender        the gender
+     * @param introduction  the introduction
+     * @param registered    the registered
+     * @param administrator the administrator
+     */
     public Member(String userName, String gender, String introduction, long registered, boolean administrator) {
         this.userName = userName;
         this.gender = gender;
@@ -43,50 +63,110 @@ public class Member {
         this.administrator = administrator;
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param memberId the member id
+     */
     public void setId(long memberId) {
         id = memberId;
     }
 
+    /**
+     * Gets user name.
+     *
+     * @return the user name
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * Sets user name.
+     *
+     * @param userName the user name
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
+    /**
+     * Gets gender.
+     *
+     * @return the gender
+     */
     public String getGender() {
         return gender;
     }
 
+    /**
+     * Sets gender.
+     *
+     * @param gender the gender
+     */
     public void setGender(String gender) {
         this.gender = gender;
     }
 
+    /**
+     * Gets introduction.
+     *
+     * @return the introduction
+     */
     public String getIntroduction() {
         return introduction;
     }
 
+    /**
+     * Sets introduction.
+     *
+     * @param introduction the introduction
+     */
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
     }
 
+    /**
+     * Gets registered.
+     *
+     * @return the registered
+     */
     public long getRegistered() {
         return registered;
     }
 
+    /**
+     * Sets registered.
+     *
+     * @param registered the registered
+     */
     public void setRegistered(long registered) {
         this.registered = registered;
     }
 
+    /**
+     * Is administrator boolean.
+     *
+     * @return the boolean
+     */
     public boolean isAdministrator() {
         return administrator;
     }
 
+    /**
+     * Sets administrator.
+     *
+     * @param administrator the administrator
+     */
     public void setAdministrator(boolean administrator) {
         this.administrator = administrator;
     }
